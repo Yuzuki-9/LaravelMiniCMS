@@ -1,20 +1,24 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Front;
 
+use App\Http\Controllers\Controller;
 use App\Models\Post;
 use Illuminate\Http\Request;
 
 class PostController extends Controller
 {
     /**
-     * Display a listing of the resource.
+     * 一覧画面
      *
      * @return \Illuminate\Http\Response
      */
     public function index()
     {
-        //
+        // 公開・新しい順に表示
+        $posts = Post::publicList();
+
+        return view('front.posts.index', compact('posts'));
     }
 
     /**
@@ -39,14 +43,17 @@ class PostController extends Controller
     }
 
     /**
-     * Display the specified resource.
+     * 詳細画面
      *
      * @param  \App\Models\Post  $post
      * @return \Illuminate\Http\Response
      */
-    public function show(Post $post)
+    public function show(int $id)
     {
-        //
+        // showアクションは、初期状態では引数にモデルバインディンガしてある状態だが、is_publicで検索する必要があるため、idに変更
+        $post = Post::publicFindById($id);  // findOrFail → $idが存在しない値の時、404エラーが出るようにする
+
+        return view('front.posts.show', compact('post'));
     }
 
     /**

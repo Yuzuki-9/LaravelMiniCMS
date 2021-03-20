@@ -35,6 +35,7 @@ class RouteServiceProvider extends ServiceProvider
      */
 
     protected $namespace = 'App\\Http\\Controllers';
+
     public function boot()
     {
         $this->configureRateLimiting();
@@ -45,9 +46,18 @@ class RouteServiceProvider extends ServiceProvider
                 ->namespace($this->namespace)
                 ->group(base_path('routes/api.php'));
 
-            Route::middleware('web')
-                ->namespace($this->namespace)
-                ->group(base_path('routes/web.php'));
+            // フロント画面
+            Route::middleware('web')  //ルーティングに共通のミドルウェア（前処理）を適用できる。ミドルウェアの設定は、「app/Http/kernel.php」で行う
+                ->namespace($this->namespace . '\Front')
+                ->as('front.')  //リンクを設定するときのルート名
+                ->group(base_path('routes/front.php'));
+            
+            // 管理画面
+            Route::prefix('admin')  // prefix：ルーティングURLの頭に共通のURLをつけることができる
+                ->middleware('web')
+                ->namespace($this->namespace . '\Back')
+                ->as('back.')  //リンクを設定するときのルート名
+                ->group(base_path('routes/back.php'));
         });
     }
 

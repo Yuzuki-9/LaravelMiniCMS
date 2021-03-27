@@ -33,10 +33,13 @@ class Post extends Model
 {
     use HasFactory;
 
+    // 更新できるプロパティを設定
+    // id, created_at, updated_atはDBとフレームワークの機能で更新するのでfillableには書かない
     protected $fillable = [
         'title', 'body', 'is_public', 'published_at'
     ];
- 
+
+    // castsにはどのような型を扱うかを設定する
     protected $casts = [
         'is_public' => 'bool',
         'published_at' => 'datetime'

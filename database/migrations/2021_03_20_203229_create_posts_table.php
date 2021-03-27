@@ -18,7 +18,7 @@ class CreatePostsTable extends Migration
             $table->string('title');
             $table->text('body')->nullable();
             $table->boolean('is_public')->default(true)->comment('公開・非公開');
-            $table->dateTime('published_at')->default(DB::raw('CURRENT_TIMESTAMP'))->comment('公開日');
+            $table->dateTime('published_at')->default(DB::raw('CURRENT_TIMESTAMP'))->comment('公開日');  //default(DB::raw('CURRENT_TIMESTAMP')) → 
             $table->timestamps();
         });
     }

@@ -36,6 +36,9 @@ class RouteServiceProvider extends ServiceProvider
 
     protected $namespace = 'App\\Http\\Controllers';
 
+    // web.phpに直接記述するのではなく、2つのファイルに分ける
+    // front.php ： 一般ユーザー用
+    // back.php ： 管理画面用
     public function boot()
     {
         $this->configureRateLimiting();

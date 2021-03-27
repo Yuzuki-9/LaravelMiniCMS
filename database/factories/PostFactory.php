@@ -21,6 +21,8 @@ class PostFactory extends Factory
      */
     public function definition()
     {
+        // テストデータの内容を記述する
+        // Factoryを使うと、ランダムデータをたくさん生成することができる
         $random_date = $this->faker->dateTimeBetween('-1year', '-1day');
         
         return [

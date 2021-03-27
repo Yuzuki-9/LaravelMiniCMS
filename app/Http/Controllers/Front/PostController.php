@@ -45,6 +45,7 @@ class PostController extends Controller
     /**
      * 詳細画面
      *
+     * @param int $id
      * @param  \App\Models\Post  $post
      * @return \Illuminate\Http\Response
      */

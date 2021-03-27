@@ -57,7 +57,7 @@ class RouteServiceProvider extends ServiceProvider
             
             // 管理画面
             Route::prefix('admin')  // prefix：ルーティングURLの頭に共通のURLをつけることができる
-                ->middleware('web')
+                ->middleware('web', 'auth')  //authを追加することで、ログインしないとアクセスできなくする
                 ->namespace($this->namespace . '\Back')
                 ->as('back.')  //リンクを設定するときのルート名
                 ->group(base_path('routes/back.php'));

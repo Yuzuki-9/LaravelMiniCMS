@@ -14,6 +14,7 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
         // 実行したいシーダーを登録する
+        $this->call(UserSeeder::class);
         $this->call(PostSeeder::class);
     }
 }

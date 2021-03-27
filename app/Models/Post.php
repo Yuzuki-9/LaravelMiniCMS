@@ -65,4 +65,10 @@ class Post extends Model
     {
         return $query->public()->findOrFail($id);
     }
+
+    // 公開日を年月日で表示（フォーマットを共通で使う）
+    public function getPublishedFormatAttribute()
+    {
+        return $this->published_at->format('Y年m月d日');
+    }
 }

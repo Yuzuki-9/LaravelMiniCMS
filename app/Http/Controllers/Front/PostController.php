@@ -7,6 +7,9 @@ use App\Models\Post;
 use Illuminate\Http\Request;
 
 // フロントのコントローラー
+// DBのクエリはなるべくコントローラーに書かないようにする
+// →ほかのコントローラーで同じクエリを実行したい時、同じ処理を書かなければいけないため
+
 class PostController extends Controller
 {
     /**
@@ -16,8 +19,8 @@ class PostController extends Controller
      */
     public function index()
     {
-        // 公開・新しい順に表示
-        $posts = Post::publicList();
+        // 公開・新しい順に表示・スコープで絞る
+        $posts = Post::publicList();  // スコープを使ってモデルに記述することで同じ処理を書かないようにする
 
         return view('front.posts.index', compact('posts'));
     }
@@ -52,6 +55,7 @@ class PostController extends Controller
      */
     public function show(int $id)
     {
+        // スコープで取得
         // showアクションは、初期状態では引数にモデルバインディンガしてある状態だが、is_publicで検索する必要があるため、idに変更
         $post = Post::publicFindById($id);  // findOrFail → $idが存在しない値の時、404エラーが出るようにする
 

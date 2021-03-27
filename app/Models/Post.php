@@ -45,13 +45,13 @@ class Post extends Model
         'published_at' => 'datetime'
     ];
 
-    // 公開のみ表示
+    // 公開のみ表示のスコープ
     public function scopePublic(Builder $query)
     {
         return $query->where('is_public', true);
     }
  
-    // 公開記事一覧取得
+    // 公開記事一覧取得のスコープ
     public function scopePublicList(Builder $query)
     {
         return $query
@@ -60,7 +60,7 @@ class Post extends Model
             ->paginate(10);
     }
  
-    // 公開記事をIDで取得
+    // 公開記事をIDで取得のスコープ
     public function scopePublicFindById(Builder $query, int $id)
     {
         return $query->public()->findOrFail($id);

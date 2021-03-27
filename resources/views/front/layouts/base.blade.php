@@ -34,7 +34,7 @@
             <div class="row justify-content-center">
                 <div class="col-md-12">
                     <div class="card">
-                        @yield('content')  <!-- この部分にこれからつくる各ビューファイルの内容が入る -->
+                        @yield('content')  {{-- この部分にこれからつくる各ビューファイルの内容が入る「section('content')」 --}}
                     </div>
                 </div>
             </div>

@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Back;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Post;
+use App\Http\Requests\PostRequest;
 
 class PostController extends Controller
 {
@@ -34,13 +35,24 @@ class PostController extends Controller
 
     /**
      * Store a newly created resource in storage.
-     *
+     * 登録処理
+     * 
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(PostRequest $request)  //PostRequestをインポートして引数にすることでバリデーションエラーが有った場合入力画面に戻る処理を自動的にしてくれる
     {
-        //
+        $post = Post::create($request->all());  //createメソッド
+
+        if ($post) {  //createに成功すると、trueが返ってくるので成功したら編集画面にリダイレクト、ソレ以外は登録画面にリダイレクト
+            return redirect()
+            ->route('back.posts.edit', $post)
+            ->withSuccess('データを登録しました。');
+        } else {
+            return redirect()
+            ->route('back.posts.create')
+            ->withError('データの登録に失敗しました。');
+        }
     }
 
     /**

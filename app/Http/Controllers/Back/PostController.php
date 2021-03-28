@@ -4,17 +4,20 @@ namespace App\Http\Controllers\Back;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Models\Post;
 
 class PostController extends Controller
 {
     /**
      * Display a listing of the resource.
+     * 一覧画面
      *
      * @return \Illuminate\Http\Response
      */
     public function index()
     {
-        //
+        $posts = Post::latest('id')->paginate(20);  //latest()で最新のものから降順で並び替え
+        return view('back,posts.index', compact('posts'));
     }
 
     /**

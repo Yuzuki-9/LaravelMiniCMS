@@ -22,12 +22,14 @@ class PostController extends Controller
 
     /**
      * Show the form for creating a new resource.
+     * 新規登録画面
      *
      * @return \Illuminate\Http\Response
      */
     public function create()
     {
-        //
+        // 新規登録画面は入力フォームを登録するだけなので、コントローラーの処理はない
+        return view('back.posts.create');
     }
 
     /**

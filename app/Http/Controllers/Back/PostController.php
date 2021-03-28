@@ -47,11 +47,11 @@ class PostController extends Controller
         if ($post) {  //createに成功すると、trueが返ってくるので成功したら編集画面にリダイレクト、ソレ以外は登録画面にリダイレクト
             return redirect()
             ->route('back.posts.edit', $post)
-            ->withSuccess('データを登録しました。');
+            ->withSuccess('データを登録しました。');  //フラッシュメッセージを表示
         } else {
             return redirect()
             ->route('back.posts.create')
-            ->withError('データの登録に失敗しました。');
+            ->withError('データの登録に失敗しました。');  ////フラッシュメッセージを表示
         }
     }
 
